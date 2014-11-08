@@ -17,9 +17,9 @@ def calPairPeak(peakMap,T_range,F_range,N):
 				f2=peakMap[j][1]
 				deltaT=peakMap[j][0]-peakMap[i][0]
 				hashValue=f1**2+f2**2+deltaT**2
-				hashMap.append((peakMap[i][0],hashValue))			
+				hashMap.append((peakMap[i][0],hashValue))
 	return hashMap
- 
+
 def matchValues(hashTable1, hashTable2):
 	matchTimePair=[]
 	for i in range(0,len(hashTable1)):
@@ -29,22 +29,22 @@ def matchValues(hashTable1, hashTable2):
 	return matchTimePair
 
 if __name__=='__main__':
-	rate1, data1 = scipy.io.wavfile.read('./Data/clips/1.wav')
-	rate2, data2 = scipy.io.wavfile.read('./Data/clips/2.wav')
-	rate3, data3 = scipy.io.wavfile.read('./Data/clips/3.wav')
+	rate1, data1 = scipy.io.wavfile.read('../Data/clips/1.wav')
+	rate2, data2 = scipy.io.wavfile.read('../Data/clips/2.wav')
+	rate3, data3 = scipy.io.wavfile.read('../Data/clips/3.wav')
 	if (len(data1.shape) > 1):
 		data1=data1[:,0]
-	
+
 	if (len(data2.shape) > 1):
 		data2=data2[:,0]
 
 	if (len(data3.shape) > 1):
 		data3=data3[:,0]
-	
+
 	x1=data1[0:10*rate1]
 	x2=data2[0:10*rate2]
 	x3=data3[0:10*rate3]
-	
+
 	X1=FindPeak.stft(x1)
 	X2=FindPeak.stft(x2)
 	X3=FindPeak.stft(x3)
@@ -63,7 +63,7 @@ if __name__=='__main__':
 	hashTable1=calPairPeak(peaks1,100,100,1)
 	hashTable2=calPairPeak(peaks2,100,100,1)
 #	hashTable3=calPairPeak(peaks3,20,20,10)
-	
+
 	timeMatches12=matchValues(hashTable1,hashTable2)
 #	timeMatches13=matchValues(hashTable1,hashTable3)
 
@@ -71,7 +71,7 @@ if __name__=='__main__':
 #	print "hashTable2: "+str(hashTable2)
 	print "matchValues_12:"+str(timeMatches12)
 #	print "matchValues_13:"+str(timeMatches13)
-#	print timeMatches12[:][0]	
+#	print timeMatches12[:][0]
 	t1_list, t2_list = zip(*timeMatches12)
 #	plt.plot(t1_list,t2_list,'bo')
 #	plt.show()
