@@ -3,6 +3,7 @@ import scipy
 import pylab
 import matplotlib.pyplot as plt
 import numpy as np
+import HoughTransform as HT
 
 def calPairPeak(peakMap,T_range,F_range,N):
 	hashMap=[];
@@ -59,8 +60,8 @@ if __name__=='__main__':
 #	pylab.savefig("peak.png")
 
 #	peakMap=((1,2),(3,4),(5,6))
-	hashTable1=calPairPeak(peaks1,20,20,1)
-	hashTable2=calPairPeak(peaks2,20,20,1)
+	hashTable1=calPairPeak(peaks1,100,100,1)
+	hashTable2=calPairPeak(peaks2,100,100,1)
 #	hashTable3=calPairPeak(peaks3,20,20,10)
 	
 	timeMatches12=matchValues(hashTable1,hashTable2)
@@ -72,5 +73,8 @@ if __name__=='__main__':
 #	print "matchValues_13:"+str(timeMatches13)
 #	print timeMatches12[:][0]	
 	t1_list, t2_list = zip(*timeMatches12)
-	plt.plot(t1_list,t2_list,'bo')
-	plt.show()
+#	plt.plot(t1_list,t2_list,'bo')
+#	plt.show()
+	
+	HT.hough_transform(timeMatches12)
+
