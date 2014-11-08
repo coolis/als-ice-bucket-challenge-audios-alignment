@@ -4,40 +4,9 @@ import pylab
 import matplotlib
 import os
 import HashTable
+import FindPeak
 
 dir = os.path.dirname(__file__)
-
-# Computes the Short-Time Fourier Transform (STFT) of a signal, with a given
-# window length, and shift between adjacent windows
-def stft(x, window_len=4096, window_shift=2048):
-	w = scipy.hamming(window_len)
-	X = scipy.array([scipy.fft(w*x[i:i+window_len])
-		for i in range(0, len(x)-window_len, window_shift)])
-	return scipy.absolute(X[:,0:window_len/2])
-
-def find_peaks(X, k=20):
-    peaks = []
-    coefs = []
-    peak_values = []
-
-    for t in range(X.shape[0]):
-        peak_values.append(0)
-        for f in range(X.shape[1]):
-            isPeak = True
-            for i in range(max(0, t-k/2), min(X.shape[0], t+k/2)):
-                if isPeak == False:
-                    break
-                for j in range(max(0, f-k/2), min(X.shape[1], f+k/2)):
-                    if X[i, j] > X[t, f]:
-                        isPeak = False
-                        break
-            if isPeak:
-                coefs.append(X[t, f])
-                peaks.append((t, f))
-                if peak_values[t] == 0:
-                    peak_values[t] = X[t, f]
-
-    return peaks, coefs, peak_values
 
 #flattern the 2D HashMap to 1D
 def HashMapto1D(S):
@@ -127,16 +96,16 @@ if __name__ == '__main__':
         data_4 = data_4[:,0]
 
 #do the short time fourier transform
-    stft_1 = stft(data_1)
-    stft_2 = stft(data_2)
-    stft_3 = stft(data_3)
-    stft_4 = stft(data_4)
+    stft_1 = FindPeak.stft(data_1)
+    stft_2 = FindPeak.stft(data_2)
+    stft_3 = FindPeak.stft(data_3)
+    stft_4 = FindPeak.stft(data_4)
 
 #find the peaks in a 20*20 sourandings
-    peaks_1, coefs_1, peak_values_1 = find_peaks(stft_1, 20)
-    peaks_2, coefs_2, peak_values_2 = find_peaks(stft_2, 20)
-    peaks_3, coefs_3, peak_values_3 = find_peaks(stft_3, 20)
-    peaks_4, coefs_4, peak_values_4 = find_peaks(stft_4, 20)
+    peaks_1, coefs_1, peak_values_1 = FindPeak.find_peaks(stft_1, 20)
+    peaks_2, coefs_2, peak_values_2 = FindPeak.find_peaks(stft_2, 20)
+    peaks_3, coefs_3, peak_values_3 = FindPeak.find_peaks(stft_3, 20)
+    peaks_4, coefs_4, peak_values_4 = FindPeak.find_peaks(stft_4, 20)
 
 #create the hashmap in time and frequence range with maximum n pairs each
     hashMap_1 = HashTable.calPairPeak(peaks_1, 50, 50, 10)
