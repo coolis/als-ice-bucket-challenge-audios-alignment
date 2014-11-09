@@ -4,7 +4,7 @@ import pylab
 import matplotlib.pyplot as plt
 import numpy as np
 import HoughTransform as HT
-
+import RANSAC 
 def calPairPeak(peakMap,T_range,F_range,N):
 	hashMap=[];
 	for i in range(0,len(peakMap)):
@@ -77,4 +77,4 @@ if __name__=='__main__':
 #	plt.show()
 	
 	HT.hough_transform(timeMatches12)
-
+	RANSAC.ransac(timeMatches12)
