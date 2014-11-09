@@ -4,7 +4,8 @@ import pylab
 import matplotlib.pyplot as plt
 import numpy as np
 import HoughTransform as HT
-import RANSAC 
+import RANSAC
+
 def calPairPeak(peakMap,T_range,F_range,N):
 	hashMap=[];
 	for i in range(0,len(peakMap)):
@@ -60,8 +61,8 @@ if __name__=='__main__':
 #	pylab.savefig("peak.png")
 
 #	peakMap=((1,2),(3,4),(5,6))
-	hashTable1=calPairPeak(peaks1,100,100,1)
-	hashTable2=calPairPeak(peaks2,100,100,1)
+	hashTable1=calPairPeak(peaks1,20,20,10)
+	hashTable2=calPairPeak(peaks2,20,20,10)
 #	hashTable3=calPairPeak(peaks3,20,20,10)
 
 	timeMatches12=matchValues(hashTable1,hashTable2)
@@ -76,5 +77,8 @@ if __name__=='__main__':
 #	plt.plot(t1_list,t2_list,'bo')
 #	plt.show()
 	
-	HT.hough_transform(timeMatches12)
-	RANSAC.ransac(timeMatches12)
+	rho,theta,H_max=HT.hough_transform(timeMatches12)
+	print "rho=",rho
+	print "theta=",theta
+	print "h_max=",H_max
+#	RANSAC.ransac(timeMatches12)
