@@ -24,14 +24,6 @@ def find_line_model(pts):
 	return m, c
 
 def find_intercept_point(m, c, x0, y0):
-    """ find an intercept point of the line model with
-        a normal from point (x0,y0) to it
-    :param m slope of the line model
-    :param c y-intercept of the line model
-    :param x0 point's x coordinate
-    :param y0 point's y coordinate
-    :return intercept point
-    """
  
     # intersection point with the model
     x = (x0 + m*y0 - m*c)/(1 + m**2)
