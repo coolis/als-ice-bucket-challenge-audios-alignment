@@ -5,7 +5,7 @@ import math
 import haar_transform
 
 dir = os.path.dirname(__file__)
-file_name = "../Data/accel.csv"
+file_name = "../../Data/accel.csv"
 
 test = [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0]
 
@@ -58,7 +58,7 @@ def find_edges(data, base, n=5):
                     n_entries[negative[j]] = i + base
                     break
             negative.sort(reverse=True)
-            
+
     return p_entries, n_entries
 
 if __name__ == '__main__':
