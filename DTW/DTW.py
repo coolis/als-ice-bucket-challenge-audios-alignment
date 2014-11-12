@@ -3,8 +3,8 @@ import scipy.io.wavfile
 import pylab
 import matplotlib
 import os
-import HashTable
-import FindPeak
+import utils.FindPeak
+import utils.HashTable
 
 dir = os.path.dirname(__file__)
 
@@ -96,22 +96,22 @@ if __name__ == '__main__':
         data_4 = data_4[:,0]
 
 #do the short time fourier transform
-    stft_1 = FindPeak.stft(data_1)
-    stft_2 = FindPeak.stft(data_2)
-    stft_3 = FindPeak.stft(data_3)
-    stft_4 = FindPeak.stft(data_4)
+    stft_1 = utils.FindPeak.stft(data_1)
+    stft_2 = utils.FindPeak.stft(data_2)
+    stft_3 = utils.FindPeak.stft(data_3)
+    stft_4 = utils.FindPeak.stft(data_4)
 
 #find the peaks in a 20*20 sourandings
-    peaks_1, coefs_1, peak_values_1 = FindPeak.find_peaks(stft_1, 20)
-    peaks_2, coefs_2, peak_values_2 = FindPeak.find_peaks(stft_2, 20)
-    peaks_3, coefs_3, peak_values_3 = FindPeak.find_peaks(stft_3, 20)
-    peaks_4, coefs_4, peak_values_4 = FindPeak.find_peaks(stft_4, 20)
+    peaks_1, coefs_1, peak_values_1 = utils.FindPeak.find_peaks(stft_1, 20)
+    peaks_2, coefs_2, peak_values_2 = utils.FindPeak.find_peaks(stft_2, 20)
+    peaks_3, coefs_3, peak_values_3 = utils.FindPeak.find_peaks(stft_3, 20)
+    peaks_4, coefs_4, peak_values_4 = utils.FindPeak.find_peaks(stft_4, 20)
 
 #create the hashmap in time and frequence range with maximum n pairs each
-    hashMap_1 = HashTable.calPairPeak(peaks_1, 50, 50, 10)
-    hashMap_2 = HashTable.calPairPeak(peaks_2, 50, 50, 10)
-    hashMap_3 = HashTable.calPairPeak(peaks_3, 50, 50, 10)
-    hashMap_4 = HashTable.calPairPeak(peaks_4, 50, 50, 10)
+    hashMap_1 = utils.HashTable.calPairPeak(peaks_1, 50, 50, 10)
+    hashMap_2 = utils.HashTable.calPairPeak(peaks_2, 50, 50, 10)
+    hashMap_3 = utils.HashTable.calPairPeak(peaks_3, 50, 50, 10)
+    hashMap_4 = utils.HashTable.calPairPeak(peaks_4, 50, 50, 10)
 
 #1. Convert the hash values to 1D sequence
     z_1 = HashMapto1D(hashMap_1)
