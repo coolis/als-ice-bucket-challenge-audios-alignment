@@ -16,7 +16,15 @@
 <h3>Dynamic Time Warping</h3>
 <p>Dynamic Time Warping is another way to do the alignment. It calculates the distance between two signals (hashed values sequences used). The ALS sentence of an audio is cropped and then to be compuated the DTW with all the sub-sequence of another audio with the same length as the sample ALS sentence. Edit Distance and Real Penalty method also used for distance calculation to compare the results with DTW.<p>
 
-
+<h2>Run the code</h2>
+<ul>
+    <li>Python version: Python 2.7.6+</li>
+    <li>Required libraries: Numpy and SciPy</li>
+    <li>Cross_correlation/Python/haar_smoothing.py: smooth the signal using haar transform</li>
+    <li>Cross_correlation/Python/cross_correlation.py: align the signal using cross correlation</li>
+    <li>Line_fitting/HashTable.py: fit a line to the hash values of the signal using Hough transform and RANSAC</li>
+    <li>DTW/DTW.py: calculate the distance between the hash values of two signals</li>
+</ul>
 
 
 
